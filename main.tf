@@ -1,7 +1,14 @@
-terraform {
-  required_version = "> 0.12.0"
+provider "azurerm" {
+  version = "> 0.12.0"
+  features {}
+}
 
+terraform {
   backend "azurerm" {
+    resource_group_name  = "tf-storage-rg"
+    storage_account_name = "tfsa16305"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
   }
 }
 
@@ -67,3 +74,4 @@ output "website_hostname_dev" {
   value       = "${azurerm_app_service.spacegame_dev.default_site_hostname}"
   description = "The hostname of the website in the dev environment"
 }
+
